@@ -561,7 +561,7 @@ DJISDKNode::initDataSubscribeFromFC(ros::NodeHandle& nh)
     rtk_yaw_info_publisher =
             nh.advertise<std_msgs::UInt8>("dji_sdk/rtk_info_yaw", 10);
 
-    if(vehicle->getFwVersion() > versionBase33)
+    if(true)
     {
       topicList5hz.push_back(Telemetry::TOPIC_RTK_CONNECT_STATUS);
 
