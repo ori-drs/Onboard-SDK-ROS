@@ -273,8 +273,11 @@ DJISDKNode::publish5HzData(Vehicle *vehicle, RecvContainer recvFrame,
     Telemetry::TypeMap<Telemetry::TOPIC_RTK_POSITION_INFO>::type rtk_telemetry_position_info=
         vehicle->subscribe->getValue<Telemetry::TOPIC_RTK_POSITION_INFO>();
 
-    Telemetry::TypeMap<Telemetry::TOPIC_RTK_CONNECT_STATUS>::type rtk_telemetry_connect_status=
+    Telemetry::TypeMap<Telemetry::TOPIC_RTK_CONNECT_STATUS>::type rtk_telemetry_connect_status;
+    if(vehicle->getFwVersion() > versionBase33) {
+      rtk_telemetry_connect_status=
             vehicle->subscribe->getValue<Telemetry::TOPIC_RTK_CONNECT_STATUS>();
+    }
 
     sensor_msgs::NavSatFix rtk_position;
     rtk_position.header.stamp = msg_time;
@@ -303,9 +306,11 @@ DJISDKNode::publish5HzData(Vehicle *vehicle, RecvContainer recvFrame,
     rtk_position_info.data = (int)rtk_telemetry_position_info;
     p->rtk_position_info_publisher.publish(rtk_position_info);
 
-    std_msgs::UInt8 rtk_connection_status;
-    rtk_connection_status.data = (rtk_telemetry_connect_status.rtkConnected == 1) ? 1 : 0;
-    p->rtk_connection_status_publisher.publish(rtk_connection_status);
+    if(vehicle->getFwVersion() > versionBase33) {
+      std_msgs::UInt8 rtk_connection_status;
+      rtk_connection_status.data = (rtk_telemetry_connect_status.rtkConnected == 1) ? 1 : 0;
+      p->rtk_connection_status_publisher.publish(rtk_connection_status);
+    }
   }
 
   return;
