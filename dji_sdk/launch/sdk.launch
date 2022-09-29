@@ -6,7 +6,7 @@
     <param name="baud_rate" type="int" value="921600"/>
     <param name="app_id" type="int" value="1102264"/>
     <param name="app_version" type="int" value="1"/>
-    <param name="align_time" type="bool" value="false"/>
+    <param name="align_time" type="bool" value="true"/>
     <param name="enc_key" type="string" value="c9291f9a8dccfd1ec26990af814e246189338461cf61ed64e4e69f5a495db2d6"/>
     <param name="use_broadcast" type="bool" value="false"/>
     </node>
