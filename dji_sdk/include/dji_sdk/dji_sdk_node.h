@@ -434,8 +434,8 @@ private:
   AlignState curr_align_state;
 
   static int constexpr STABLE_ALIGNMENT_COUNT = 100;
-  static double constexpr TIME_DIFF_CHECK = 0.001;
-  static double constexpr TIME_DIFF_ALERT = 0.001;
+  static double constexpr TIME_DIFF_CHECK = 0.01;
+  static double constexpr TIME_DIFF_ALERT = 0.01;
 
   ros::Time base_time;
 
